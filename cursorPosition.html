@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                * {
+                 box-sizing: border-box;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                html, body {
+                    height: 100%;
+                    overflow: hidden;
+                    width: 100%;
+                    object-fit: fill;
+            
+                }
+            
+                #demo {
+                    background-image: url('starfield.webp');
+                    background-size: 100% 100%;
+                    height: 100%;
+                    width: 100%;
+                    background-repeat: no-repeat;
+                }
+            
+                #info {
+                    padding-left: 10px;
+                    border-radius: 10px;
+                    position: absolute;
+                    user-select: none;
+                    font-size: 2em;
+                    width: 120px;
+                  color: #EEEEEE;
+                }
+            </style>
+        </head>
+
+        <body>
+            <div id="demo">
+                <div id="info"></div>
+            </div>
+        </body>
+        <script>
+        const infoElement = document.getElementById('info');
+                var xpos = 500;
+                var ypos = 300;
+                infoElement.style.top = ypos + "px";
+                infoElement.style.left = xpos + "px";
+                infoElement.innerHTML = "<img src=\'spaceship.png\' width=\'150x\' height=\'150px\'>";
+
+            var upPressed = false;
+            var leftPressed = false;
+            var downPressed = false;
+            var rightPressed = false;
+            var xvel = 0;
+            var yvel = 0;
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'w') {
+                    upPressed = true;
+                } else if (event.key === 's') {
+                    downPressed = true;
+                } else if (event.key === 'a') {
+                    leftPressed = true;
+                } else if (event.key === 'd') {
+                    rightPressed = true;
+                }
+            });
+            document.addEventListener('keyup', (event) => {
+                if (event.key === 'w') {
+                    upPressed = false;
+                } else if (event.key === 's') {
+                    downPressed = false;
+                } else if (event.key === 'a') {
+                    leftPressed = false;
+                } else if (event.key === 'd') {
+                    rightPressed = false;
+                }
+            });
+
+            function movePlayer() {
+                if (upPressed) {
+                    yvel -= 2;
+                } 
+                
+                if (leftPressed) {
+                    xvel -= 2;
+                }        
+                if (downPressed) {
+                    yvel += 2;
+                }        
+                if (rightPressed) {
+                    xvel += 2;
+                } 
+                xpos += xvel;
+                ypos += yvel;
+                xvel *= 0.95
+                yvel *= 0.95
+                infoElement.style.top = (ypos) + "px";
+                infoElement.style.left = (xpos) + "px";
+                            
+            }
+            let intervalId = setInterval(() => movePlayer(), 30);
+        </script>
+</html>
