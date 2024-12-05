@@ -105,7 +105,9 @@
                 yvel *= 0.98
                 infoElement.style.top = (ypos) + "px";
                 infoElement.style.left = (xpos) + "px";
-                yvel += 1.2
+                if (ypos != 650) {
+                    yvel += 1.2
+                }
                 if (ypos > 650) {
                     yvel = 0;
                     ypos = 650;
